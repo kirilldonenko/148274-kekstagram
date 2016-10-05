@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Кирилл Доненко](https://up.htmlacademy.ru/javascript/7/user/148274).
-* Наставник: `Неизвестно`.
+* Наставник: `без наставника`.
 
 ---
 
