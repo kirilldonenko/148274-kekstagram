@@ -1,4 +1,5 @@
 'use strict';
+// функция для вывода статистических сообщений
 var getMessage = function(a, b) {
   if (typeof a === 'boolean') {
     if (a) {
