@@ -24,4 +24,4 @@ var getMessage = function(a, b) {
   } else {
     return 'Переданы некорректные данные';
   }
-}
+};

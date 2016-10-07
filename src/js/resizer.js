@@ -121,34 +121,34 @@
 
           // Добавление оверлея(чёрного цвета с прозрачностью 80%) и размера изображения.
           // Для лучшей читаемости кода объявим переменные с короткими именами.
-          var sideC = this._resizeConstraint.side; // сторона кадра
-          var sideW = this._container.width; // ширина изображения
-          var sideH = this._container.height; // высота изображения
-          var lineW = this._ctx.lineWidth; // толщина линии
+      var sideC = this._resizeConstraint.side; // сторона кадра
+      var sideW = this._container.width; // ширина изображения
+      var sideH = this._container.height; // высота изображения
+      var lineW = this._ctx.lineWidth; // толщина линии
           // толщина верхней части оверлея
-          var deltaW = (this._container.width - this._resizeConstraint.side) / 2;
+      var deltaW = (this._container.width - this._resizeConstraint.side) / 2;
           // толщина боковой части оверлея
-          var deltaH = (this._container.height - this._resizeConstraint.side) / 2;
-          this._ctx.moveTo(-sideW / 2, -sideH / 2);
-          this._ctx.lineTo(sideW / 2, -sideH / 2);
-          this._ctx.lineTo(sideW / 2, sideH / 2);
-          this._ctx.lineTo(sideW / 2 - deltaW - lineW / 2, sideH / 2 - deltaH - lineW / 2);
-          this._ctx.lineTo(sideW / 2 - deltaW - lineW / 2, sideH / 2 - deltaH - sideC - lineW);
-          this._ctx.lineTo(sideW / 2 - deltaW - sideC - lineW, sideH / 2 - deltaH - sideC - lineW);
-          this._ctx.lineTo(-sideW / 2, -sideH / 2);
-          this._ctx.lineTo(-sideW / 2, sideH / 2);
-          this._ctx.lineTo(sideW / 2, sideH / 2);
-          this._ctx.lineTo(sideW / 2 - deltaW - lineW / 2, sideH / 2 - deltaH - lineW / 2);
-          this._ctx.lineTo(sideW / 2 - deltaW - sideC - lineW, sideH / 2 - deltaH - lineW / 2);
-          this._ctx.lineTo(sideW / 2 - deltaW - sideC - lineW, sideH / 2 - deltaH - sideC - lineW);
-          this._ctx.lineTo(-sideW / 2, -sideH / 2);
-          this._ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-          this._ctx.fill();
-          this._ctx.fillStyle = 'white';
-          this._ctx.font = '20px sans-serif';
-          this._ctx.textBaseline = 'bottom';
-          this._ctx.textAlign = 'center';
-          this._ctx.fillText(sideW + ' x ' + sideH, 0, -sideH / 2 + deltaH - lineW);
+      var deltaH = (this._container.height - this._resizeConstraint.side) / 2;
+      this._ctx.moveTo(-sideW / 2, -sideH / 2);
+      this._ctx.lineTo(sideW / 2, -sideH / 2);
+      this._ctx.lineTo(sideW / 2, sideH / 2);
+      this._ctx.lineTo(sideW / 2 - deltaW - lineW / 2, sideH / 2 - deltaH - lineW / 2);
+      this._ctx.lineTo(sideW / 2 - deltaW - lineW / 2, sideH / 2 - deltaH - sideC - lineW);
+      this._ctx.lineTo(sideW / 2 - deltaW - sideC - lineW, sideH / 2 - deltaH - sideC - lineW);
+      this._ctx.lineTo(-sideW / 2, -sideH / 2);
+      this._ctx.lineTo(-sideW / 2, sideH / 2);
+      this._ctx.lineTo(sideW / 2, sideH / 2);
+      this._ctx.lineTo(sideW / 2 - deltaW - lineW / 2, sideH / 2 - deltaH - lineW / 2);
+      this._ctx.lineTo(sideW / 2 - deltaW - sideC - lineW, sideH / 2 - deltaH - lineW / 2);
+      this._ctx.lineTo(sideW / 2 - deltaW - sideC - lineW, sideH / 2 - deltaH - sideC - lineW);
+      this._ctx.lineTo(-sideW / 2, -sideH / 2);
+      this._ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+      this._ctx.fill();
+      this._ctx.fillStyle = 'white';
+      this._ctx.font = '20px sans-serif';
+      this._ctx.textBaseline = 'bottom';
+      this._ctx.textAlign = 'center';
+      this._ctx.fillText(sideW + ' x ' + sideH, 0, -sideH / 2 + deltaH - lineW);
 
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
