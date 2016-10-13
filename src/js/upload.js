@@ -68,6 +68,12 @@
   };
 
   /**
+   * Форма кадрирования изображения.
+   * @type {HTMLFormElement}
+   */
+  var resizeForm = document.forms['upload-resize'];
+
+  /**
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
@@ -83,8 +89,8 @@
     sizeFrame.max = currentResizer._image.naturalWidth;
     var totalSizeX = +coordX.value + (+sizeFrame.value);
     var totalSizeY = +coordY.value + (+sizeFrame.value);
-    if (totalSizeX < currentResizer._image.naturalWidth
-      && totalSizeY < currentResizer._image.naturalHeight
+    if (totalSizeX <= currentResizer._image.naturalWidth
+      && totalSizeY <= currentResizer._image.naturalHeight
       && coordX.value !== ''
       && coordY.value !== ''
       && sizeFrame.value !== '') {
@@ -93,18 +99,20 @@
       return false;
     }
   };
+  resizeForm.oninput = function() {
+    var buttonSubmit = document.querySelector('#resize-fwd');
+    if (resizeFormIsValid()) {
+      buttonSubmit.disabled = false;
+    } else {
+      buttonSubmit.disabled = true;
+    }
+  };
 
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
    */
   var uploadForm = document.forms['upload-select-image'];
-
-  /**
-   * Форма кадрирования изображения.
-   * @type {HTMLFormElement}
-   */
-  var resizeForm = document.forms['upload-resize'];
 
   /**
    * Форма добавления фильтра.
@@ -224,9 +232,6 @@
 
       resizeForm.classList.add('invisible');
       filterForm.classList.remove('invisible');
-    } else {
-      var buttonSubmit = document.querySelector('#resize-fwd');
-      buttonSubmit.disabled = true;
     }
   };
 
