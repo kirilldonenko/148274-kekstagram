@@ -101,8 +101,9 @@
   };
 
   // Деактивация кнопки отправки, если введенные данные невалидны
+  var buttonSubmit = document.querySelector('#resize-fwd');
+  buttonSubmit.disabled = true;
   resizeForm.oninput = function() {
-    var buttonSubmit = document.querySelector('#resize-fwd');
     if (resizeFormIsValid()) {
       buttonSubmit.disabled = false;
     } else {
