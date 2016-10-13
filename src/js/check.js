@@ -1,6 +1,6 @@
 'use strict';
 // функция для вывода статистических сообщений
-var getMessage = function(a, b) {
+var getMessage = function(a, b) {//eslint-disable-line
   if (typeof a === 'boolean') {
     if (a) {
       return 'Переданное GIF-изображение анимировано и содержит ' + b + ' кадров';
