@@ -68,11 +68,47 @@
   };
 
   /**
+   * Форма кадрирования изображения.
+   * @type {HTMLFormElement}
+   */
+  var resizeForm = document.forms['upload-resize'];
+
+  /**
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
   var resizeFormIsValid = function() {
-    return true;
+    var coordX = document.querySelector('#resize-x');
+    var coordY = document.querySelector('#resize-y');
+    var sizeFrame = document.querySelector('#resize-size');
+    coordX.min = 0;
+    coordY.min = 0;
+    sizeFrame.min = 0;
+    coordX.max = currentResizer._image.naturalWidth;
+    coordY.max = currentResizer._image.naturalHeight;
+    sizeFrame.max = currentResizer._image.naturalWidth;
+    var totalSizeX = +coordX.value + (+sizeFrame.value);
+    var totalSizeY = +coordY.value + (+sizeFrame.value);
+    if (totalSizeX <= currentResizer._image.naturalWidth
+      && totalSizeY <= currentResizer._image.naturalHeight
+      && coordX.value !== ''
+      && coordY.value !== ''
+      && sizeFrame.value !== '') {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // Деактивация кнопки отправки, если введенные данные невалидны
+  var buttonSubmit = document.querySelector('#resize-fwd');
+  buttonSubmit.disabled = true;
+  resizeForm.oninput = function() {
+    if (resizeFormIsValid()) {
+      buttonSubmit.disabled = false;
+    } else {
+      buttonSubmit.disabled = true;
+    }
   };
 
   /**
@@ -80,12 +116,6 @@
    * @type {HTMLFormElement}
    */
   var uploadForm = document.forms['upload-select-image'];
-
-  /**
-   * Форма кадрирования изображения.
-   * @type {HTMLFormElement}
-   */
-  var resizeForm = document.forms['upload-resize'];
 
   /**
    * Форма добавления фильтра.
