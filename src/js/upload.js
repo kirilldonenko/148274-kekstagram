@@ -99,6 +99,8 @@
       return false;
     }
   };
+
+  // Деактивация кнопки отправки, если введенные данные невалидны
   resizeForm.oninput = function() {
     var buttonSubmit = document.querySelector('#resize-fwd');
     if (resizeFormIsValid()) {
