@@ -219,8 +219,8 @@
 
   var activeFilter;
   var browserCookies = document.cookie;
-  var valueCookies = browserCookies.get('upload-filter');
-  if (valueCookies) {
+  if (browserCookies) {
+    var valueCookies = browserCookies.get('upload-filter');
     activeFilter = filterForm.querySelector('[value=' + valueCookies + ']');
   } else {
     activeFilter = filterForm.querySelector('#upload-filter-none');
