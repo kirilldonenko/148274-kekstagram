@@ -215,6 +215,18 @@
     uploadForm.classList.remove('invisible');
   };
 
+  // Установка фильтра из cookie
+
+  var activeFilter;
+  var browserCookies = document.cookie;
+  var valueCookies = browserCookies.get('upload-filter');
+  if (valueCookies) {
+    activeFilter = filterForm.querySelector('[value=' + valueCookies + ']');
+  } else {
+    activeFilter = filterForm.querySelector('#upload-filter-none');
+  }
+  activeFilter.checked = true;
+
   /**
    * Обработка отправки формы кадрирования. Если форма валидна, экспортирует
    * кропнутое изображение в форму добавления фильтра и показывает ее.
@@ -256,6 +268,21 @@
    */
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
+
+    browserCookies.set('upload-filter', filterForm.checked.value);
+    var now = new Date();
+
+    //день рождения Грейс Хоппер в текущем году
+    var d = new Date(now.getFullYear(), 11, 9);
+    if (now > d) {
+      var days = Math.floor((now - d) / 1000 / 3600 / 24);
+    } else {
+      d = new Date(now.getFullYear() - 1, 11, 9);
+      days = Math.floor((now - d) / 1000 / 3600 / 24);
+    }
+
+    var exp = new Date(+now + days * 1000 * 3600 * 24);
+    browserCookies.expires = exp.toUTCString();
 
     cleanupResizer();
     updateBackground();
