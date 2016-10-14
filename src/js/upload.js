@@ -269,20 +269,32 @@
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
 
-    browserCookies.set('upload-filter', filterForm.checked.value);
-    var now = new Date();
+    if (browserCookies) {
+      var listFilters = document.getElementsByName('upload-filter');
+      for (var i = 0; i < listFilters.length; i++) {
+        if (listFilters[i].checked) {
+          browserCookies.set('upload-filter', listFilters[i].value);
+        }
+      }
 
-    //день рождения Грейс Хоппер в текущем году
-    var d = new Date(now.getFullYear(), 11, 9);
-    if (now > d) {
-      var days = Math.floor((now - d) / 1000 / 3600 / 24);
-    } else {
-      d = new Date(now.getFullYear() - 1, 11, 9);
-      days = Math.floor((now - d) / 1000 / 3600 / 24);
+      var now = new Date();
+
+      // день рождения Грейс Хоппер в текущем году
+      var d = new Date(now.getFullYear(), 11, 9);
+
+      // количество дней с последнего прошедшего дня рождения Грейс Хоппер.
+      if (now > d) {
+        var days = Math.floor((now - d) / 1000 / 3600 / 24);
+      } else {
+        d = new Date(now.getFullYear() - 1, 11, 9);
+        days = Math.floor((now - d) / 1000 / 3600 / 24);
+      }
+
+      // срок жизни cookie
+      var exp = new Date(+now + days * 1000 * 3600 * 24);
+      browserCookies.expires = exp.toUTCString();
     }
 
-    var exp = new Date(+now + days * 1000 * 3600 * 24);
-    browserCookies.expires = exp.toUTCString();
 
     cleanupResizer();
     updateBackground();
