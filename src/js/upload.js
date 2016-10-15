@@ -217,15 +217,14 @@
 
   // Установка фильтра из cookie
 
-  var activeFilter;
-  var browserCookies = document.cookie;
-  if (browserCookies) {
-    var valueCookies = browserCookies.get('upload-filter');
-    activeFilter = filterForm.querySelector('[value=' + valueCookies + ']');
+  if (Cookies.get('upload-filter')) {
+    var activeFilter = filterForm.querySelector('[value=' + Cookies.get('upload-filter') + ']');
+    filterImage.className = 'filter-image-preview ' + Cookies.get('upload-filter');
   } else {
     activeFilter = filterForm.querySelector('#upload-filter-none');
   }
   activeFilter.checked = true;
+
 
   /**
    * Обработка отправки формы кадрирования. Если форма валидна, экспортирует
@@ -269,11 +268,11 @@
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
 
-    if (browserCookies) {
+    if (Cookies) {
       var listFilters = document.getElementsByName('upload-filter');
       for (var i = 0; i < listFilters.length; i++) {
         if (listFilters[i].checked) {
-          browserCookies.set('upload-filter', listFilters[i].value);
+          Cookies.set('upload-filter', listFilters[i].value);
         }
       }
 
@@ -292,7 +291,7 @@
 
       // срок жизни cookie
       var exp = new Date(+now + days * 1000 * 3600 * 24);
-      browserCookies.expires = exp.toUTCString();
+      Cookies.expires = exp.toUTCString();
     }
 
 
