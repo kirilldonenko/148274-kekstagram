@@ -89,11 +89,11 @@
     sizeFrame.max = currentResizer._image.naturalWidth;
     var totalSizeX = +coordX.value + (+sizeFrame.value);
     var totalSizeY = +coordY.value + (+sizeFrame.value);
-    if (totalSizeX <= currentResizer._image.naturalWidth
-      && totalSizeY <= currentResizer._image.naturalHeight
-      && coordX.value !== ''
-      && coordY.value !== ''
-      && sizeFrame.value !== '') {
+    if (totalSizeX <= currentResizer._image.naturalWidth &&
+      totalSizeY <= currentResizer._image.naturalHeight &&
+      coordX.value !== '' &&
+      coordY.value !== '' &&
+      sizeFrame.value !== '') {
       return true;
     } else {
       return false;
@@ -219,7 +219,7 @@
 
   if (Cookies.get('upload-filter')) {
     var activeFilter = filterForm.querySelector('[value=' + Cookies.get('upload-filter') + ']');
-    filterImage.className = 'filter-image-preview ' + Cookies.get('upload-filter');
+    filterImage.className = 'filter-image-preview ' + 'filter-' + Cookies.get('upload-filter');
   } else {
     activeFilter = filterForm.querySelector('#upload-filter-none');
   }
