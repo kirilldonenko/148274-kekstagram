@@ -89,11 +89,11 @@
     sizeFrame.max = currentResizer._image.naturalWidth;
     var totalSizeX = +coordX.value + (+sizeFrame.value);
     var totalSizeY = +coordY.value + (+sizeFrame.value);
-    if (totalSizeX <= currentResizer._image.naturalWidth
-      && totalSizeY <= currentResizer._image.naturalHeight
-      && coordX.value !== ''
-      && coordY.value !== ''
-      && sizeFrame.value !== '') {
+    if (totalSizeX <= currentResizer._image.naturalWidth &&
+      totalSizeY <= currentResizer._image.naturalHeight &&
+      coordX.value !== '' &&
+      coordY.value !== '' &&
+      sizeFrame.value !== '') {
       return true;
     } else {
       return false;
@@ -215,6 +215,17 @@
     uploadForm.classList.remove('invisible');
   };
 
+  // Установка фильтра из cookie
+
+  if (Cookies.get('upload-filter')) {
+    var activeFilter = filterForm.querySelector('[value=' + Cookies.get('upload-filter') + ']');
+    filterImage.className = 'filter-image-preview ' + 'filter-' + Cookies.get('upload-filter');
+  } else {
+    activeFilter = filterForm.querySelector('#upload-filter-none');
+  }
+  activeFilter.checked = true;
+
+
   /**
    * Обработка отправки формы кадрирования. Если форма валидна, экспортирует
    * кропнутое изображение в форму добавления фильтра и показывает ее.
@@ -256,6 +267,33 @@
    */
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
+
+    if (Cookies) {
+      var listFilters = document.getElementsByName('upload-filter');
+      for (var i = 0; i < listFilters.length; i++) {
+        if (listFilters[i].checked) {
+          Cookies.set('upload-filter', listFilters[i].value);
+        }
+      }
+
+      var now = new Date();
+
+      // день рождения Грейс Хоппер в текущем году
+      var d = new Date(now.getFullYear(), 11, 9);
+
+      // количество дней с последнего прошедшего дня рождения Грейс Хоппер.
+      if (now > d) {
+        var days = Math.floor((now - d) / 1000 / 3600 / 24);
+      } else {
+        d = new Date(now.getFullYear() - 1, 11, 9);
+        days = Math.floor((now - d) / 1000 / 3600 / 24);
+      }
+
+      // срок жизни cookie
+      var exp = new Date(+now + days * 1000 * 3600 * 24);
+      Cookies.expires = exp.toUTCString();
+    }
+
 
     cleanupResizer();
     updateBackground();
