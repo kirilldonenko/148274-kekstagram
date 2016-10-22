@@ -6,6 +6,7 @@ env:
 
 globals:
   define: true
+  Cookies: true
 
 extends:
   "eslint:recommended"
