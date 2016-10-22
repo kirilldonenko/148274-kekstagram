@@ -131,13 +131,12 @@ var getPictureMini = function(pic) {
     image.width = IMAGE_WIDTH;
     image.leight = IMAGE_LEIGHT;
   };
-  var picture = document.querySelector('.picture');
   photo.onerror = function() {
-    picture.classList.add('picture-load-failure');
+    pictureMini.classList.add('picture-load-failure');
   };
   photo.src = pic.url;
   photoTimeout = setTimeout(function() {
-    picture.classList.add('picture-load-failure');
+    pictureMini.classList.add('picture-load-failure');
   }, PHOTO_LOAD_TIMEOUT);
 
   return pictureMini;
