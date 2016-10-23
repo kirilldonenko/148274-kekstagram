@@ -1,4 +1,5 @@
 'use strict';
+// функция загрузки фотографий с помощью JSONP
 module.exports = function pictures(url, callback, callbackName) {
   if (!callbackName) {
     callbackName = 'cd' + Date.now();

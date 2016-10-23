@@ -1,4 +1,5 @@
 'use strict';
+// функция показа всех маленьких фотографий
 (function() {
   var getPictureMini = require('./picture');
   var pictures = require('./load');
