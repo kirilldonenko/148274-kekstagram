@@ -1,6 +1,7 @@
 'use strict';
 // функция показа всех маленьких фотографий
 (function() {
+  var Gallery = require('./gallery');
   var getPictureMini = require('./picture');
   var pictures = require('./load');
 
@@ -12,6 +13,7 @@
     pics.forEach(function(pic) {
       container.appendChild(getPictureMini(pic));
     });
+    Gallery.setPictures(pics);
   };
   pictures(PICTURES_LOAD_URL, showPicturesMini, '__cb_JSONP');
   filters.classList.remove('hidden');
