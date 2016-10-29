@@ -12,6 +12,7 @@ var Gallery = function() {
     this.pictures = pics;
   };
   Gallery.prototype.show = function(number) {
+    self.setActivePicture(number);
     self.galleryOverlayClose.onclick = function() {
       self.hide();
     };
@@ -23,11 +24,10 @@ var Gallery = function() {
       }
     };
     this.galleryOverlay.classList.remove('invisible');
-    self.setActivePicture(number);
   };
 
   Gallery.prototype.hide = function() {
-    this.galleryOverlay.classList.add('invisible');
+    self.galleryOverlay.classList.add('invisible');
     self.galleryOverlayClose.onclick = null;
     self.galleryOverlayImage.onclick = null;
   };
