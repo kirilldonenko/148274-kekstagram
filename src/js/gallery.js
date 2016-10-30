@@ -34,7 +34,7 @@ var Gallery = function() {
   Gallery.prototype.setActivePicture = function(number) {
     this.activePicture = number;
     var bigPicture = this.pictures[number];
-    this.galleryOverlayImage.src = bigPicture.src;
+    this.galleryOverlayImage.src = bigPicture.url;
     this.galleryOverlay.querySelector('.likes-count').textContent = bigPicture.likes;
     this.galleryOverlay.querySelector('.comments-count').textContent = bigPicture.comments;
   };

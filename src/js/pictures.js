@@ -10,8 +10,8 @@
   var filters = document.querySelector('.filters');
   filters.classList.add('hidden');
   var showPicturesMini = function(pics) {
-    pics.forEach(function(pic) {
-      container.appendChild(getPictureMini(pic));
+    pics.forEach(function(pic, num) {
+      container.appendChild(getPictureMini(pic, num));
     });
     Gallery.setPictures(pics);
   };
