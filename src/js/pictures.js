@@ -2,7 +2,7 @@
 // функция показа всех маленьких фотографий
 (function() {
   var Gallery = require('./gallery');
-  var getPictureMini = require('./picture');
+  var Picture = require('./picture');
   var pictures = require('./load');
 
   var container = document.querySelector('.pictures');
@@ -11,7 +11,9 @@
   filters.classList.add('hidden');
   var showPicturesMini = function(pics) {
     pics.forEach(function(pic, num) {
-      container.appendChild(getPictureMini(pic, num));
+      var miniPic = new Picture(pic, num);
+      container.appendChild(miniPic.element);
+
     });
     Gallery.setPictures(pics);
   };
