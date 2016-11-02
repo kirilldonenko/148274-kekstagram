@@ -1,13 +1,11 @@
 'use strict';
 // функция загрузки фотографий с помощью JSONP
-module.exports = function pictures(url, callback, callbackName) {
-  if (!callbackName) {
-    callbackName = 'cd' + Date.now();
-  }
-  window[callbackName] = function(pics) {
+module.exports = function pictures(url, params, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function (evt) {
+    var pics = JSON.parse(evt.target.response);
     callback(pics);
   };
-  var script = document.createElement('script');
-  script.src = url + '?callback=' + callbackName;
-  document.body.appendChild(script);
+  xhr.open('GET', url + '?from=' + params.from + '&to=' + params.to + '&filter=' + params.filter);
+  xhr.send();
 };
