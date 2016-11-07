@@ -30,10 +30,10 @@
     container.innerHTML = '';
     numberPic = 0;
     pictures(PICTURES_LOAD_URL, {
-        from: numberPic,
-        to: numberLastPicOnPage,
-        filter: filterID
-      },
+      from: numberPic,
+      to: numberLastPicOnPage,
+      filter: filterID
+    },
       showPicturesMini);
   };
   changeFilter(filter);
