@@ -12,9 +12,7 @@
   var filters = document.querySelector('.filters');
   filters.classList.add('hidden');
   var footer = document.querySelector('.footer');
-  var numberPic = 0;
-  var numberLastPicOnPage = 11;
-  var numberPage = 1;
+  var numberPic;
   var pageSize = 12;
   var filter = 'filter-popular';
 
@@ -30,23 +28,33 @@
     container.innerHTML = '';
     numberPic = 0;
     pictures(PICTURES_LOAD_URL, {
-      from: numberPic,
-      to: numberLastPicOnPage,
+      from: numberPic * pageSize,
+      to: numberPic * pageSize + pageSize,
       filter: filterID
     },
       showPicturesMini);
+    if (footer.getBoundingClientRect().top < window.innerHeight) {
+      numberPic++;
+      pictures(PICTURES_LOAD_URL, {
+        from: numberPic * pageSize,
+        to: numberPic * pageSize + pageSize,
+        filter: filterID
+      },
+        showPicturesMini);
+      numberPic++;
+    }
   };
   changeFilter(filter);
   var lastCall = Date.now();
   window.addEventListener('scroll', function() {
     if (Date.now() - lastCall >= TROTTLE_TIMEOUT) {
-      if (footer.getBoundingClientRect().top - window.innerHeight + GAP < 0) {
+      if (footer.getBoundingClientRect().top - window.innerHeight - GAP < 0) {
         pictures(PICTURES_LOAD_URL, {
-          from: numberPage * pageSize,
-          to: numberPage * pageSize + pageSize,
+          from: numberPic * pageSize,
+          to: numberPic * pageSize + pageSize,
           filter: filter
         }, showPicturesMini);
-        numberPage++;
+        numberPic++;
       }
       lastCall = Date.now();
     }
@@ -59,7 +67,6 @@
       filter = evt.target.id;
       changeFilter(filter);
     }
-
-  });
+  }, true);
   filters.classList.remove('hidden');
 })();
