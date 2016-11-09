@@ -77,6 +77,9 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
+  var coordX = document.querySelector('#resize-x');
+  var coordY = document.querySelector('#resize-y');
+  var sizeFrame = document.querySelector('#resize-size');
   var resizeFormIsValid = function() {
     coordX.min = 0;
     coordY.min = 0;
@@ -105,7 +108,7 @@
   buttonSubmit.disabled = true;
   resizeForm.addEventListener('input', function handlerInput() {
     if (resizeFormIsValid()) {
-      currentResizer.moveConstraint(+coordX.value, +coordY.value, +sizeFrame.value);
+
       buttonSubmit.disabled = false;
     } else {
       buttonSubmit.disabled = true;
@@ -186,20 +189,6 @@
           currentResizer = new Resizer(fileReader.result);
           currentResizer.setElement(resizeForm);
 
-          // Установка начальных значений в поля формы кадрирования.
-
-          var coordX = document.querySelector('#resize-x');
-          var coordY = document.querySelector('#resize-y');
-          var sizeFrame = document.querySelector('#resize-size');
-          var parametersFrame = currentResizer.getConstraint();
-          var setValuesInForm = function() {
-            coordX.value = parametersFrame.x;
-            coordY.value = parametersFrame.y;
-            sizeFrame.value = parametersFrame.side;
-          };
-
-          window.addEventListener('resizerchange', setValuesInForm);
-
           uploadMessage.classList.add('invisible');
 
           uploadForm.classList.add('invisible');
@@ -213,6 +202,32 @@
         // Показ сообщения об ошибке, если формат загружаемого файла не поддерживается
         showMessage(Action.ERROR);
       }
+    }
+  });
+
+  // Установка начальных значений в поля формы кадрирования.
+
+
+  var setValuesInForm = function() {
+    var parametersFrame = currentResizer.getConstraint();
+    coordX.value = parametersFrame.x;
+    coordY.value = parametersFrame.y;
+    sizeFrame.value = parametersFrame.side;
+  };
+
+  var moveResizer = function() {
+    currentResizer.moveConstraint(+coordX.value, +coordY.value, +sizeFrame.value);
+  };
+
+  coordX.addEventListener('change', moveResizer);
+  coordY.addEventListener('change', moveResizer);
+  sizeFrame.addEventListener('change', moveResizer);
+
+  window.addEventListener('resizerchange', setValuesInForm);
+
+  resizeForm.addEventListener('change', function() {
+    if (resizeFormIsValid()) {
+      currentResizer.setConstraint(+coordX.value, +coordY.value, +sizeFrame.value);
     }
   });
 
