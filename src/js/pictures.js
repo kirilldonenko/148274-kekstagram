@@ -41,7 +41,6 @@
         filter: filterID
       },
         showPicturesMini);
-      numberPic++;
     }
   };
   changeFilter(filter);
@@ -49,12 +48,12 @@
   window.addEventListener('scroll', function() {
     if (Date.now() - lastCall >= TROTTLE_TIMEOUT) {
       if (footer.getBoundingClientRect().top - window.innerHeight - GAP < 0) {
+        numberPic++;
         pictures(PICTURES_LOAD_URL, {
           from: numberPic * pageSize,
           to: numberPic * pageSize + pageSize,
           filter: filter
         }, showPicturesMini);
-        numberPic++;
       }
       lastCall = Date.now();
     }

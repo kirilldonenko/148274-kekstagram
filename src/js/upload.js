@@ -207,21 +207,12 @@
 
   // Установка начальных значений в поля формы кадрирования.
 
-
   var setValuesInForm = function() {
     var parametersFrame = currentResizer.getConstraint();
     coordX.value = parametersFrame.x;
     coordY.value = parametersFrame.y;
     sizeFrame.value = parametersFrame.side;
   };
-
-  var moveResizer = function() {
-    currentResizer.moveConstraint(+coordX.value, +coordY.value, +sizeFrame.value);
-  };
-
-  coordX.addEventListener('change', moveResizer);
-  coordY.addEventListener('change', moveResizer);
-  sizeFrame.addEventListener('change', moveResizer);
 
   window.addEventListener('resizerchange', setValuesInForm);
 
