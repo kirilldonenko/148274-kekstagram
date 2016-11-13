@@ -119,16 +119,20 @@
           this._resizeConstraint.side - this._ctx.lineWidth / 2,
           this._resizeConstraint.side - this._ctx.lineWidth / 2);
 
-          // Добавление оверлея(чёрного цвета с прозрачностью 80%) и размера изображения.
-          // Для лучшей читаемости кода объявим переменные с короткими именами.
+      // Добавление оверлея(чёрного цвета с прозрачностью 80%) и размера изображения.
+      // Для лучшей читаемости кода объявим переменные с короткими именами.
       var sideC = this._resizeConstraint.side; // сторона кадра
       var sideW = this._container.width; // ширина изображения
       var sideH = this._container.height; // высота изображения
       var lineW = this._ctx.lineWidth; // толщина линии
-          // толщина верхней части оверлея
+
+      // толщина верхней части оверлея
       var deltaW = (this._container.width - this._resizeConstraint.side) / 2;
-          // толщина боковой части оверлея
+
+      // толщина боковой части оверлея
       var deltaH = (this._container.height - this._resizeConstraint.side) / 2;
+
+      this._ctx.beginPath();
       this._ctx.moveTo(-sideW / 2, -sideH / 2);
       this._ctx.lineTo(sideW / 2, -sideH / 2);
       this._ctx.lineTo(sideW / 2, sideH / 2);
