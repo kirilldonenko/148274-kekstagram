@@ -35,6 +35,7 @@
       lengthArr = pics.length;
       showPicturesMini(pics);
     });
+
     if ((footer.getBoundingClientRect().top < window.innerHeight) && lengthArr) {
       numberPic++;
       renderPage(filterID);

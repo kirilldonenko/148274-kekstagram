@@ -8,7 +8,7 @@ var Gallery = function() {
 
 
   Gallery.prototype.setPictures = function(pics) {
-    this.pictures = pics;
+    this.pictures = this.pictures.concat(pics);
   };
 
   Gallery.prototype.clearPictures = function() {
