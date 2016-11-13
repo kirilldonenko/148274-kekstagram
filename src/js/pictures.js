@@ -31,13 +31,13 @@
       filter: filterID
     },
     function(pics) {
-      showPicturesMini(pics)
+      showPicturesMini(pics);
     });
     if (footer.getBoundingClientRect().top < window.innerHeight) {
       numberPic++;
       renderPage(filterID);
     }
-  }
+  };
   renderPage(filter);
   var lastCall = Date.now();
   window.addEventListener('scroll', function() {
@@ -50,7 +50,7 @@
           filter: filter
         },
         function(pics) {
-          showPicturesMini(pics)
+          showPicturesMini(pics);
         });
       }
       lastCall = Date.now();
