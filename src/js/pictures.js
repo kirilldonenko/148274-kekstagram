@@ -25,15 +25,17 @@
   };
 
   var renderPage = function(filterID) {
+    var lengthArr;
     load(PICTURES_LOAD_URL, {
       from: numberPic * pageSize,
       to: numberPic * pageSize + pageSize,
       filter: filterID
     },
     function(pics) {
+      lengthArr = pics.length;
       showPicturesMini(pics);
     });
-    if (footer.getBoundingClientRect().top < window.innerHeight) {
+    if ((footer.getBoundingClientRect().top < window.innerHeight) && lengthArr) {
       numberPic++;
       renderPage(filterID);
     }
