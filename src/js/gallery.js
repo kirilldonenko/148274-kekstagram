@@ -22,7 +22,6 @@ var Gallery = function() {
       self.hide();
     };
     this.galleryOverlayImage.onclick = function() {
-
       if (self.activePicture < self.pictures.length - 1) {
         self.setActivePicture(self.activePicture + 1);
       } else {

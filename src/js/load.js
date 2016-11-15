@@ -1,5 +1,6 @@
 'use strict';
 // функция загрузки фотографий с помощью JSONP
+
 module.exports = function load(url, params, callback) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function(evt) {
