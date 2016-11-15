@@ -29,10 +29,10 @@
   function renderPage(filterID) {
     var lengthArr = 0;
     load(PICTURES_LOAD_URL, {
-        from: numberPic * pageSize,
-        to: numberPic * pageSize + pageSize,
-        filter: filterID
-      },
+      from: numberPic * pageSize,
+      to: numberPic * pageSize + pageSize,
+      filter: filterID
+    },
       function(pics) {
         lengthArr = pics.length;
         showPicturesMini(pics);
@@ -42,7 +42,7 @@
       numberPic++;
       renderPage(filterID);
     }
-  };
+  }
   renderPage(filter);
   var lastCall = Date.now();
   window.addEventListener('scroll', function() {
@@ -50,10 +50,10 @@
       if (footer.getBoundingClientRect().top - window.innerHeight - GAP < 0) {
         numberPic++;
         load(PICTURES_LOAD_URL, {
-            from: numberPic * pageSize,
-            to: numberPic * pageSize + pageSize,
-            filter: filter
-          },
+          from: numberPic * pageSize,
+          to: numberPic * pageSize + pageSize,
+          filter: filter
+        },
           function(pics) {
             showPicturesMini(pics);
           });
