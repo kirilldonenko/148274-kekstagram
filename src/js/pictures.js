@@ -36,12 +36,11 @@
       function(pics) {
         lengthArr = pics.length;
         showPicturesMini(pics);
+        if (container.getBoundingClientRect().bottom < window.innerHeight && (numberPic <= lengthArr / pageSize)) {
+          numberPic++;
+          renderPage(filter);
+        }
       });
-
-    if (container.getBoundingClientRect().bottom < window.innerHeight && (numberPic <= lengthArr / pageSize)) {
-      numberPic++;
-      renderPage(filterID);
-    }
   }
   renderPage(filter);
   var lastCall = Date.now();
