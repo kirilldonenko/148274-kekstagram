@@ -33,7 +33,7 @@ var getPictureMini = function(pic) {
   return pictureMini;
 
 };
-var Gallery = require('./gallery');
+var gallery = require('./gallery');
 var Picture = function(pic, num) {
 
   this.data = pic;
@@ -42,7 +42,7 @@ var Picture = function(pic, num) {
   this.element.onclick = function(evt) {
     evt.preventDefault();
     if (evt.currentTarget.classList.contains('picture')) {
-      Gallery.show(num);
+      gallery.show(num);
     }
   };
   this.remove = function() {
