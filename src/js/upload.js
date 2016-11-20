@@ -237,11 +237,11 @@
     uploadForm.classList.remove('invisible');
   });
 
-  // Установка фильтра из cookie
+  // Установка фильтра из LocalStorage
 
-  if (Cookies.get('upload-filter')) {
-    var activeFilter = filterForm.querySelector('[value=' + Cookies.get('upload-filter') + ']');
-    filterImage.className = 'filter-image-preview ' + 'filter-' + Cookies.get('upload-filter');
+  if (localStorage.getItem('upload-filter')) {
+    var activeFilter = filterForm.querySelector('[value=' + localStorage.getItem('upload-filter') + ']');
+    filterImage.className = 'filter-image-preview ' + 'filter-' + localStorage.getItem('upload-filter');
   } else {
     activeFilter = filterForm.querySelector('#upload-filter-none');
   }
@@ -284,13 +284,19 @@
 
   /**
    * Отправка формы фильтра. Возвращает в начальное состояние, предварительно
-   * записав сохраненный фильтр в cookie.
+   * записав сохраненный фильтр в LocalStorage.
    * @param {Event} evt
    */
   filterForm.addEventListener('submit', function handlerSubmitFilter(evt) {
     evt.preventDefault();
 
-    if (Cookies) {
+    var listFilters = document.getElementsByName('upload-filter');
+    for (var i = 0; i < listFilters.length; i++) {
+      if (listFilters[i].checked) {
+        localStorage.setItem('upload-filter', listFilters[i].value);
+      }
+    }
+    /*if (Cookies) {
       var listFilters = document.getElementsByName('upload-filter');
       for (var i = 0; i < listFilters.length; i++) {
         if (listFilters[i].checked) {
@@ -314,7 +320,7 @@
       // срок жизни cookie
       var exp = new Date(+now + days * 1000 * 3600 * 24);
       Cookies.expires = exp.toUTCString();
-    }
+    }*/
 
 
     cleanupResizer();
