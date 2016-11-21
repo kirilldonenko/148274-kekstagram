@@ -10,19 +10,19 @@ var getPictureMini = function(pic) {
   var IMAGE_LEIGHT = 182;
   var photo = new Image();
   var photoTimeout = null;
-  var image = pictureMini.getElementsByTagName('img')[0];
   var pictureMini = templateContainer.querySelector('.picture').cloneNode(true);
+  var image = pictureMini.getElementsByTagName('img')[0];
   pictureMini.querySelector('.picture-comments').textContent = pic.comments;
   pictureMini.querySelector('.picture-likes').textContent = pic.likes;
-  photo.onload = function() {
+  photo.addEventListener('load', function handlerLoadPhoto() {
     clearTimeout(photoTimeout);
     image.src = pic.url;
     image.width = IMAGE_WIDTH;
     image.leight = IMAGE_LEIGHT;
-  };
-  photo.onerror = function() {
+  });
+  photo.addEventListener('error', function  handlerError() {
     pictureMini.classList.add('picture-load-failure');
-  };
+  });
   photo.src = pic.url;
   photoTimeout = setTimeout(function() {
     pictureMini.classList.add('picture-load-failure');
@@ -33,17 +33,18 @@ var gallery = require('./gallery');
 var Picture = function(pic, num) {
   this.data = pic;
   this.element = getPictureMini(pic);
-  var self = this;
-  this.element.onclick = function(evt) {
+  this.onClick = this.onClick.bind(this);
+  this.element.addEventListener('click', this.onClick);
+  Picture.prototype.onClick = function(evt) {
     evt.preventDefault();
     if (evt.currentTarget.classList.contains('picture')) {
       gallery.show(num);
     }
   };
-  this.remove = function() {
-    self.element.onclick = null;
-    self.element.onload = null;
-    self.element.onerror = null;
+  Picture.prototype.remove = function() {
+    this.element.removeEventListener('click', this.onClick);
+    this.element.removeEventListener('load', handlerLoadPhoto);
+    this.element.removeEventListener('error', handlerError);
   };
 };
 module.exports = Picture;
