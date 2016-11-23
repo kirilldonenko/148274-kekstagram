@@ -20,7 +20,7 @@ var getPictureMini = function(pic) {
     image.width = IMAGE_WIDTH;
     image.leight = IMAGE_LEIGHT;
   });
-  photo.addEventListener('error', function  handlerError() {
+  photo.addEventListener('error', function handlerError() {
     pictureMini.classList.add('picture-load-failure');
   });
   photo.src = pic.url;
@@ -43,8 +43,8 @@ var Picture = function(pic, num) {
   };
   Picture.prototype.remove = function() {
     this.element.removeEventListener('click', this.onClick);
-    this.element.removeEventListener('load', handlerLoadPhoto);
-    this.element.removeEventListener('error', handlerError);
+    //this.element.removeEventListener('load', handlerLoadPhoto);
+    //this.element.removeEventListener('error', handlerError);
   };
 };
 module.exports = Picture;
