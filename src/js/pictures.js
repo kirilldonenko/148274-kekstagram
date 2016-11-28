@@ -1,5 +1,7 @@
 'use strict';
+
 // функция показа всех маленьких фотографий
+
 (function() {
   var gallery = require('./gallery');
   var Picture = require('./picture');
@@ -7,7 +9,6 @@
   var GAP = 100;
   var TROTTLE_TIMEOUT = 100;
   var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
-
   var container = document.querySelector('.pictures');
   var filters = document.querySelector('.filters');
   filters.classList.add('hidden');
@@ -15,7 +16,6 @@
   var numberPic = 0;
   var pageSize = 12;
   var filter = 'filter-popular';
-
   var showPicturesMini = function(pics) {
     pics.forEach(function(pic, num) {
       num += numberPic * pageSize;
@@ -24,7 +24,6 @@
     });
     gallery.setPictures(pics);
   };
-
   var loadPictures = function(filterID, callback) {
     load(PICTURES_LOAD_URL, {
       from: numberPic * pageSize,
@@ -56,7 +55,6 @@
       lastCall = Date.now();
     }
   });
-
   var changeFilter = function(filterID) {
     container.innerHTML = '';
     numberPic = 0;

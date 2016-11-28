@@ -100,7 +100,6 @@
     }
   };
 
-
   /* Деактивация кнопки отправки, если введенные данные невалидны и
   изменение положения и размера кадра в форме */
 
@@ -108,7 +107,6 @@
   buttonSubmit.disabled = true;
   resizeForm.addEventListener('input', function handlerInput() {
     if (resizeFormIsValid()) {
-
       buttonSubmit.disabled = false;
     } else {
       buttonSubmit.disabled = true;
@@ -237,16 +235,15 @@
     uploadForm.classList.remove('invisible');
   });
 
-  // Установка фильтра из cookie
+  // Установка фильтра из LocalStorage
 
-  if (Cookies.get('upload-filter')) {
-    var activeFilter = filterForm.querySelector('[value=' + Cookies.get('upload-filter') + ']');
-    filterImage.className = 'filter-image-preview ' + 'filter-' + Cookies.get('upload-filter');
+  if (localStorage.getItem('upload-filter')) {
+    var activeFilter = filterForm.querySelector('[value=' + localStorage.getItem('upload-filter') + ']');
+    filterImage.className = 'filter-image-preview ' + 'filter-' + localStorage.getItem('upload-filter');
   } else {
     activeFilter = filterForm.querySelector('#upload-filter-none');
   }
   activeFilter.checked = true;
-
 
   /**
    * Обработка отправки формы кадрирования. Если форма валидна, экспортирует
@@ -284,38 +281,17 @@
 
   /**
    * Отправка формы фильтра. Возвращает в начальное состояние, предварительно
-   * записав сохраненный фильтр в cookie.
+   * записав сохраненный фильтр в LocalStorage.
    * @param {Event} evt
    */
   filterForm.addEventListener('submit', function handlerSubmitFilter(evt) {
     evt.preventDefault();
-
-    if (Cookies) {
-      var listFilters = document.getElementsByName('upload-filter');
-      for (var i = 0; i < listFilters.length; i++) {
-        if (listFilters[i].checked) {
-          Cookies.set('upload-filter', listFilters[i].value);
-        }
+    var listFilters = document.getElementsByName('upload-filter');
+    for (var i = 0; i < listFilters.length; i++) {
+      if (listFilters[i].checked) {
+        localStorage.setItem('upload-filter', listFilters[i].value);
       }
-
-      var now = new Date();
-
-      // день рождения Грейс Хоппер в текущем году
-      var d = new Date(now.getFullYear(), 11, 9);
-
-      // количество дней с последнего прошедшего дня рождения Грейс Хоппер.
-      if (now > d) {
-        var days = Math.floor((now - d) / 1000 / 3600 / 24);
-      } else {
-        d = new Date(now.getFullYear() - 1, 11, 9);
-        days = Math.floor((now - d) / 1000 / 3600 / 24);
-      }
-
-      // срок жизни cookie
-      var exp = new Date(+now + days * 1000 * 3600 * 24);
-      Cookies.expires = exp.toUTCString();
     }
-
 
     cleanupResizer();
     updateBackground();
